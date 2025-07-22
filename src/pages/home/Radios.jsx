@@ -1,7 +1,12 @@
-import {useEffect,useState,useContext} from 'react'
+import {useEffect,
+        useState,
+        useContext
+       } from 'react'
 import api from '../../api/api';
 import AuthContext from '../../context/AuthContext';
-import { Button,Spinner } from 'flowbite-react';
+import { Button,
+         Spinner
+       } from 'flowbite-react';
 import EmptyTable from '../../components/EmptyTable';
 import TableRadios from '../../components/tables/TableRadios';
 import RadioModal from '../../components/modals/RadioModal';
@@ -232,13 +237,60 @@ return (
           <Button onClick={()=>onAdd()}>Nova Rádio</Button>
         </div>
         
-        {isLoadingList&&<Spinner className='absolute top-1/2 left-1/2' color='gray' size="xl" />}
-        {!isLoadingList&&radios.length>0&&<TableRadios radios={radios} onEdit={onEdit} onDelete={onDelete} totalPages={totalPages} currentPage={currentPage} onPageChange={onChangePage}/>}
-        {!isLoadingList&&radios.length==0&&<EmptyTable buttonLabel='Adicionar Rádio' message='Rádios não encontradas.' message2='' onAdd={onAdd}/>}
-        <RadioModal categories={categories} cities={cities} errorMessage={errorMessage} isLoading={isLoading} radio={radio} setRadio={setRadio} isOpen={isModalOpen} setIsOpen={setIsModalOpen} title={'Nova Rádio'}  onSave={addRadio}/>
-        <RadioModal categories={categories} cities={cities} errorMessage={errorMessage} isLoading={isLoading} radio={radio} setRadio={setRadio} isOpen={isModalEditOpen} setIsOpen={setIsModalEditOpen} title={'Editando Rádio'}  onSave={updateRadio}/>
-        <DeleteModal isLoading={isLoading} deleteAction={deleteRadio} isOpen={isModalDeleteOpen} setIsOpen={setIsModalDeleteOpen} title="Deseja deletar esta rádio ?" description={'Esta operação vai excluir a rádio do banco de dados e não poderá ser revertida.'}/>
-        <ErrorAlertModal isOpen={isErrorAlertModalOpen} setIsOpen={setIsErrorAlertModalOpen} errorMessage={modalAlertErrorMessage}/>
+        {isLoadingList&&<Spinner 
+                           className='absolute top-1/2 left-1/2' 
+                           color='gray' 
+                           size="xl" />}
+        {!isLoadingList&&radios.length>0&&<TableRadios 
+                                             radios={radios} 
+                                             onEdit={onEdit} 
+                                             onDelete={onDelete} 
+                                             totalPages={totalPages} 
+                                             currentPage={currentPage} 
+                                             onPageChange={onChangePage}
+                                             />}
+        {!isLoadingList&&radios.length==0&&<EmptyTable 
+                                            buttonLabel='Adicionar Rádio' 
+                                            message='Rádios não encontradas.' 
+                                            message2='' 
+                                            onAdd={onAdd}/>}
+        <RadioModal 
+            categories={categories} 
+            cities={cities} 
+            errorMessage={errorMessage} 
+            isLoading={isLoading} 
+            radio={radio} 
+            setRadio={setRadio} 
+            isOpen={isModalOpen} 
+            setIsOpen={setIsModalOpen} 
+            title={'Nova Rádio'}  
+            onSave={addRadio}
+        />
+        <RadioModal 
+           categories={categories} 
+           cities={cities} 
+           errorMessage={errorMessage} 
+           isLoading={isLoading} 
+           radio={radio} 
+           setRadio={setRadio} 
+           isOpen={isModalEditOpen} 
+           setIsOpen={setIsModalEditOpen} 
+           title={'Editando Rádio'}  
+           onSave={updateRadio}
+        />
+        <DeleteModal 
+           isLoading={isLoading} 
+           deleteAction={deleteRadio} 
+           isOpen={isModalDeleteOpen} 
+           setIsOpen={setIsModalDeleteOpen} 
+           title="Deseja deletar esta rádio ?" 
+           description={'Esta operação vai excluir a rádio do banco de dados e não poderá ser revertida.'}
+        />
+        <ErrorAlertModal 
+           isOpen={isErrorAlertModalOpen} 
+           setIsOpen={setIsErrorAlertModalOpen} 
+           errorMessage={modalAlertErrorMessage}
+        />
     </div>
   )
   
