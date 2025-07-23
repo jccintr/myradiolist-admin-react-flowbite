@@ -108,6 +108,17 @@ export default {
         });
         return response;
     },
+    getLists: async (token,currentPage) => {
+        const response = await fetch(`${BASE_API}/lists?page=${currentPage}`, {
+            method: 'GET',
+            headers: {
+                Accept: 'application/json',
+                'Content-Type': 'application/json',
+                'Authorization': 'Bearer ' + token
+            },
+        });
+        return response;
+    },
     addCategory: async (token,name) => {
         const response = await fetch(`${BASE_API}/categories`, {
             method: 'POST',
@@ -170,6 +181,18 @@ export default {
     },
      deleteCity: async (token,id) => {
         const response = await fetch(`${BASE_API}/cities/${id}`, {
+            method: 'DELETE',
+            headers: {
+                Accept: 'application/json',
+                'Content-Type': 'application/json',
+                'Authorization': 'Bearer ' + token
+            },
+            
+        });
+        return response;
+    },
+     deleteList: async (token,id) => {
+        const response = await fetch(`${BASE_API}/lists/${id}`, {
             method: 'DELETE',
             headers: {
                 Accept: 'application/json',

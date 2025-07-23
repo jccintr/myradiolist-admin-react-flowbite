@@ -56,7 +56,7 @@ const RadioModal = ({isOpen,setIsOpen,title,onSave,radio,setRadio,isLoading,erro
               <Checkbox id="hsl" checked={radio.hsl} onChange={(e)=>setRadio({...radio,hsl:!radio.hsl})} />
               <Label value='Transmissão HSL' className="ml-2 font-semibold" htmlFor='hsl'/> 
             </div>
-             <div className='mt-2'>
+            <div className='mt-2'>
                 <Label value='Categorias' className="font-semibold" /> 
             </div>
             <div className="flex flex-wrap gap-2 mt-2">

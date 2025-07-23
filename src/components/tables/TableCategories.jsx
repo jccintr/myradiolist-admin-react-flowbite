@@ -2,12 +2,13 @@ import { LuPencil } from "react-icons/lu";
 import { FaRegTrashAlt } from "react-icons/fa";
 import { Table,Button } from "flowbite-react";
 import Pagination from "../Pagination";
+import { tableCustomTheme } from "../../theme/TableTheme";
 
 
 const TableCategories = ({categories,onEdit,onDelete,totalPages,currentPage,onPageChange}) => {
   return (
     <>
-    <Table hoverable >
+    <Table hoverable theme={tableCustomTheme}>
         <Table.Head>
           <Table.HeadCell>Nome</Table.HeadCell>
           <Table.HeadCell className='flex justify-end'>Ações</Table.HeadCell>
@@ -26,7 +27,7 @@ const TableCategories = ({categories,onEdit,onDelete,totalPages,currentPage,onPa
            ))}
         </Table.Body>
     </Table>
-    <div className="flex overflow-x-auto sm:justify-center mt-1">
+    <div className="flex overflow-x-auto justify-center mt-1">
         <Pagination
           currentPage={currentPage} 
           totalPages={totalPages}

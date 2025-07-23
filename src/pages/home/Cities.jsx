@@ -112,7 +112,7 @@ const Cities = () => {
    setIsLoading(true);
     const response = await api.deleteCity(token,city.id);
     if(response.ok){
-      getAll();
+      getCities();
       setIsLoading(false);
       setIsModalDeleteOpen(false);
       return;
