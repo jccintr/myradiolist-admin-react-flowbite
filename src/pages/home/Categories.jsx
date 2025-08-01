@@ -6,6 +6,7 @@ import TableCategories from '../../components/tables/TableCategories';
 import CategoryModal from '../../components/modals/CategoryModal';
 import DeleteModal from '../../components/modals/DeleteModal';
 import ErrorAlertModal from '../../components/modals/ErrorAlertModal';
+import EmptyTable from '../../components/EmptyTable';
 
 
 const Categories = () => {
@@ -24,7 +25,7 @@ const Categories = () => {
   const [currentPage, setCurrentPage] = useState(1);
 
   useEffect(()=>{
-    getCategories(0);
+   getCategories(0);
   },[]);
 
 const getCategories = async (page) => {
@@ -92,7 +93,6 @@ const updateCategory = async  () => {
    setIsLoading(true);
     const response = await api.updateCategory(token,category.id,category.name);
     if(response.ok){
-       getCategories();
        onChangePage(currentPage);
        setIsLoading(false);
        setIsModalEditOpen(false);
@@ -125,7 +125,22 @@ const deleteCategory = async () => {
       <h1 className='text-3xl font-semibold  text-blue-800'>Categorias</h1>
       <Button onClick={()=>onAdd()}>Nova Categoria</Button>
     </div>
-    {isLoadingList?<Spinner className='absolute top-1/2 left-1/2' color='gray' size="xl" />:<TableCategories categories={categories} onEdit={onEdit} onDelete={onDelete} totalPages={totalPages} currentPage={currentPage} onPageChange={onChangePage} />}
+
+    {isLoadingList&&<Spinner 
+              className='absolute top-1/2 left-1/2' 
+              color='gray' size="xl" />}
+    {!isLoadingList&&categories.length>0&&<TableCategories 
+              categories={categories} 
+              onEdit={onEdit} 
+              onDelete={onDelete} 
+              totalPages={totalPages} 
+              currentPage={currentPage} 
+              onPageChange={onChangePage} />}
+    {!isLoadingList&&categories.length==0&&<EmptyTable 
+              buttonLabel='Adicionar Categorias' 
+              message='Categorias não encontradas.' 
+              message2='' 
+              onAdd={onAdd}/>}
     <CategoryModal errorMessage={errorMessage} isLoading={isLoading} category={category} setCategory={setCategory} isOpen={isModalOpen} setIsOpen={setIsModalOpen} title={'Nova Categoria'} onSave={addCategory}/>
     <CategoryModal errorMessage={errorMessage} isLoading={isLoading} category={category} setCategory={setCategory} isOpen={isModalEditOpen} setIsOpen={setIsModalEditOpen} title={'Editando Categoria'} onSave={updateCategory}/>
     <DeleteModal isLoading={isLoading} deleteAction={deleteCategory} isOpen={isModalDeleteOpen} setIsOpen={setIsModalDeleteOpen} title="Deseja deletar esta categoria ?" description={'Esta ação excluirá a categoria do banco de dados e não poderá ser revertida.'}/>

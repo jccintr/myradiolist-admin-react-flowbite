@@ -6,6 +6,7 @@ import TableCities from '../../components/tables/TableCities';
 import CityModal from '../../components/modals/CityModal';
 import DeleteModal from '../../components/modals/DeleteModal';
 import ErrorAlertModal from '../../components/modals/ErrorAlertModal';
+import EmptyTable from '../../components/EmptyTable';
 
 const Cities = () => {
   const [cities,setCities] = useState([]);
@@ -100,7 +101,6 @@ const Cities = () => {
      setIsLoading(true);
       const response = await api.updateCity(token,city.id,city.name,city.state);
       if(response.ok){
-         getCities();
          onChangePage(currentPage);
          setIsLoading(false);
          setIsModalEditOpen(false);
@@ -133,7 +133,21 @@ const Cities = () => {
       <h1 className='text-3xl font-semibold text-blue-800'>Cidades</h1>
       <Button onClick={()=>onAdd()}>Nova Cidade</Button>
     </div>
-    {isLoadingList?<Spinner className='absolute top-1/2 left-1/2' color='gray' size="xl" />:<TableCities cities={cities} onEdit={onEdit} onDelete={onDelete} totalPages={totalPages} currentPage={currentPage} onPageChange={onChangePage}/>}
+    {isLoadingList&&<Spinner 
+             className='absolute top-1/2 left-1/2' 
+             color='gray' size="xl" />}
+    {!isLoadingList&&cities.length>0&&<TableCities 
+             cities={cities} 
+             onEdit={onEdit} 
+             onDelete={onDelete} 
+             totalPages={totalPages} 
+             currentPage={currentPage} 
+             onPageChange={onChangePage}/>}
+    {!isLoadingList&&cities.length==0&&<EmptyTable 
+            buttonLabel='Adicionar Cidade' 
+            message='Cidades não encontradas.' 
+            message2='' 
+            onAdd={onAdd}/>}
     <CityModal errorMessage={errorMessage} isLoading={isLoading} city={city} setCity={setCity} isOpen={isModalOpen} setIsOpen={setIsModalOpen} title={'Nova Cidade'} onSave={addCity} />
     <CityModal errorMessage={errorMessage} isLoading={isLoading} city={city} setCity={setCity} isOpen={isModalEditOpen} setIsOpen={setIsModalEditOpen} title={'Editando Cidade'} onSave={updateCity}/>
     <DeleteModal isLoading={isLoading} deleteAction={deleteCity} isOpen={isModalDeleteOpen} setIsOpen={setIsModalDeleteOpen} title="Deseja deletar esta cidade ?" description={'Esta ação excluirá a cidade do banco de dados e não poderá ser revertida.'}/>

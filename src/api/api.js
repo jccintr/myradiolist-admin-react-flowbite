@@ -1,5 +1,5 @@
-const BASE_API = 'http://localhost:8080';
-//const BASE_API = 'https://expense-tracker-adonis.up.railway.app'
+//const BASE_API = 'http://localhost:8080';
+const BASE_API = 'https://radios-api-production.up.railway.app'
 
 
 export default {

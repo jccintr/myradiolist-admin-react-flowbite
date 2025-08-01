@@ -1,10 +1,11 @@
-import { Button,Spinner } from 'flowbite-react';
+import { Spinner } from 'flowbite-react';
 import {useState,useEffect,useContext} from 'react'
 import api from '../../api/api';
 import AuthContext from '../../context/AuthContext';
 import TableUsers from '../../components/tables/TableUsers';
 import UserModal from '../../components/modals/UserModal';
 import UserDeleteModal from '../../components/modals/UserDeleteModal';
+import EmptyTable from '../../components/EmptyTable';
 
 const Users = () => {
   const [users,setUsers] = useState([]);
@@ -93,7 +94,6 @@ const Users = () => {
        setIsLoading(true);
         const response = await api.updateUser(token,user.id,user.name);
         if(response.ok){
-           getUsers();
            onChangePage(currentPage);
            setIsLoading(false);
            setIsModalEditOpen(false);
@@ -124,7 +124,23 @@ const Users = () => {
       <h1 className='text-3xl font-semibold text-blue-800'>Usuários</h1>
       
     </div>
-    {isLoadingList?<Spinner className='absolute top-1/2 left-1/2' color='gray' size="xl" />:<TableUsers users={users} onEdit={onEdit} onDelete={onDelete} totalPages={totalPages} currentPage={currentPage} onPageChange={onChangePage}/>}
+    {isLoadingList&&<Spinner 
+               className='absolute top-1/2 left-1/2' 
+               color='gray' 
+               size="xl" />}
+    {!isLoadingList&&users.length>0&&<TableUsers 
+               users={users} 
+               onEdit={onEdit} 
+               onDelete={onDelete} 
+               totalPages={totalPages} 
+               currentPage={currentPage} 
+               onPageChange={onChangePage}/>}
+    {!isLoadingList&&users.length==0&&<EmptyTable 
+              buttonLabel='' 
+              message='Usuários não encontrados.' 
+              message2=''
+              showButton={false} 
+              onAdd={()=>{}}/>}
     <UserModal errorMessage={errorMessage} isLoading={isLoading} user={user} setUser={setUser} isOpen={isModalOpen} setIsOpen={setIsModalOpen} title={'Novo Usuário'} onSave={addUser}/>
     <UserModal errorMessage={errorMessage} isLoading={isLoading} user={user} setUser={setUser} isOpen={isModalEditOpen} setIsOpen={setIsModalEditOpen} title={'Editando Usuário'} onSave={updateUser}/>
     <UserDeleteModal confirmText={user.email} isLoading={isLoading} deleteAction={deleteUser} isOpen={isModalDeleteOpen} setIsOpen={setIsModalDeleteOpen} title="Deseja deletar este usuário ?" description={'Esta ação excluirá o usuário e todas as suas listas de rádios do banco de dados e não poderá ser revertida.'}/>

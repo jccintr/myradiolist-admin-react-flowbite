@@ -9,7 +9,8 @@ const TableRadios = ({radios,onEdit,onDelete,totalPages,currentPage,onPageChange
     <>
     <Table hoverable theme={tableCustomTheme}>
         <Table.Head>
-          <Table.HeadCell>Nome</Table.HeadCell>
+           <Table.HeadCell  className='hidden md:table-cell'></Table.HeadCell>
+           <Table.HeadCell>Nome</Table.HeadCell>
            <Table.HeadCell className='hidden md:table-cell'>Cidade</Table.HeadCell>
            <Table.HeadCell  className='hidden md:table-cell'>Categorias</Table.HeadCell>
           <Table.HeadCell className='flex justify-end'>Ações</Table.HeadCell>
@@ -17,6 +18,7 @@ const TableRadios = ({radios,onEdit,onDelete,totalPages,currentPage,onPageChange
         <Table.Body className="divide-y">
         {radios.map((radio) => (
              <Table.Row className="bg-white" key={radio.id}>
+                  <Table.Cell  className='hidden md:table-cell'><img className="md:w-[35px] h-[35px]  " src={`${radio.imageUrl}`} alt="Logo da radio" /></Table.Cell>
                   <Table.Cell className='text-slate-950'>{radio.name}</Table.Cell>
                    <Table.Cell className='text-slate-950 hidden md:table-cell'>{radio.city.name+' - '+radio.city.state}</Table.Cell>
                    <Table.Cell className='text-slate-950 hidden md:table-cell'>{radio.categories.map((category) => (

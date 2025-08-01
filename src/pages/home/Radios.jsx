@@ -65,7 +65,7 @@ const Radios = () => {
          }       
       }
 
-     const getRadios = async (page) => {
+     const getRadios = async (page=0) => {
         setIsLoadingList(true)
         const response = await api.getRadiosPaged(page);
          if(response.ok){
@@ -198,8 +198,6 @@ const updateRadio = async  () => {
   
    const response = await api.updateRadio(token,radio.id,radio);
    if(response.ok){
-   
-     getRadios();
      onChangePage(currentPage);
      setIsModalEditOpen(false);
    } else {

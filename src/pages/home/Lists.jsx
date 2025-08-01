@@ -8,6 +8,7 @@ import { Spinner } from 'flowbite-react';
 import TableLists from '../../components/tables/TableLists';
 import ListModal from '../../components/modals/ListModal';
 import ErrorAlertModal from '../../components/modals/ErrorAlertModal';
+import EmptyTable from '../../components/EmptyTable';
 
 const Lists = () => {
   const [lists,setLists] = useState([]);
@@ -67,7 +68,20 @@ const onView = (list) => {
       <h1 className='text-3xl font-semibold text-blue-800'>Listas de Rádios</h1>
      
     </div>
-    {isLoadingList?<Spinner className='absolute top-1/2 left-1/2' color='gray' size="xl" />:<TableLists lists={lists} onView={onView} totalPages={totalPages} currentPage={currentPage} onPageChange={onChangePage}/>}
+    {isLoadingList&&<Spinner 
+             className='absolute top-1/2 left-1/2' 
+             color='gray' size="xl" />}
+    {!isLoadingList&&lists.length>0&&<TableLists 
+             lists={lists} onView={onView} 
+             totalPages={totalPages} 
+             currentPage={currentPage} 
+             onPageChange={onChangePage}/>}
+    {!isLoadingList&&lists.length==0&&<EmptyTable 
+              buttonLabel='' 
+              message='Listas não encontradas.' 
+              message2=''
+              showButton={false} 
+              onAdd={()=>{}}/>}
     <ListModal errorMessage={errorMessage} isLoading={isLoading} list={list} isOpen={isModalOpen} setIsOpen={setIsModalOpen} title={'Dados da Lista'} />
    
     <ErrorAlertModal isOpen={isErrorAlertModalOpen} setIsOpen={setIsErrorAlertModalOpen} errorMessage={modalAlertErrorMessage}/>
