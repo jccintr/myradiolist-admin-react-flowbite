@@ -38,6 +38,7 @@ const handleSubmit = async (e) => {
       try {
         var response = await api.login(formData.email, formData.password);
      } catch (error) {
+      console.log(error);
         setIsloading(false);
         setErrorMessage('Serviço indisponível. Tente novamente mais tarde.')
         return;
@@ -56,6 +57,7 @@ const handleSubmit = async (e) => {
     try {
         response = await api.validateToken(jsonToken.accessToken);
       } catch (error) {
+        console.log(error)
         setIsloading(false);
         setErrorMessage('Serviço indisponível. Tente novamente mais tarde.')
          return;
