@@ -12,6 +12,7 @@ export default function Pagination({ currentPage, totalPages, onPageChange }) {
   return (
     <div className="flex items-center justify-center gap-2 p-4">
       <button
+        aria-label='first-page'
         onClick={() => goToPage(1)}
         className="p-2 rounded-lg hover:bg-gray-200 disabled:opacity-40"
         disabled={currentPage === 1}
@@ -20,6 +21,7 @@ export default function Pagination({ currentPage, totalPages, onPageChange }) {
       </button>
 
       <button
+        aria-label='previous-page'
         onClick={() => goToPage(currentPage - 1)}
         className="p-2 rounded-lg hover:bg-gray-200 disabled:opacity-40"
         disabled={currentPage === 1}
@@ -45,6 +47,7 @@ export default function Pagination({ currentPage, totalPages, onPageChange }) {
       )}
 
       <button
+       aria-label='next-page'
         onClick={() => goToPage(currentPage + 1)}
         className="p-2 rounded-lg hover:bg-gray-200 disabled:opacity-40"
         disabled={currentPage === totalPages}
@@ -53,6 +56,7 @@ export default function Pagination({ currentPage, totalPages, onPageChange }) {
       </button>
 
       <button
+       aria-label='last-page'
         onClick={() => goToPage(totalPages)}
         className="p-2 rounded-lg hover:bg-gray-200 disabled:opacity-40"
         disabled={currentPage === totalPages}
