@@ -16,7 +16,7 @@ const TableCities = ({cities,onEdit,onDelete,totalPages,currentPage,onPageChange
         <Table.Body className="divide-y">
         {cities.map((city) => (
              <Table.Row className="bg-white" key={city.id}>
-                  <Table.Cell className='text-slate-950'>{city.name}</Table.Cell>
+                 <Table.Cell className='text-slate-950'>{city.name}</Table.Cell>
                    <Table.Cell className='text-slate-950'>{city.state}</Table.Cell>
                   <Table.Cell className='flex justify-end'>
                           <div className='flex flex-row gap-2'>
