@@ -17,7 +17,7 @@ const CategoryModal = ({isOpen,setIsOpen,title,onSave,category,setCategory,isLoa
         </Modal.Body>
 
         <Modal.Footer>
-            <Button disabled={isLoading} onClick={()=>onSave()}>{isLoading ? <Spinner size='sm'/> : 'Salvar'}</Button>
+            <Button disabled={isLoading} onClick={()=>onSave()}>{isLoading ? <Spinner aria-label='spinner' size='sm'/> : 'Salvar'}</Button>
             <Button color="gray" disabled={isLoading} onClick={() => setIsOpen(false)}>Cancelar</Button>
         </Modal.Footer>
 
