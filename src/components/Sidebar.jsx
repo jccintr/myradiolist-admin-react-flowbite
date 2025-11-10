@@ -4,7 +4,7 @@ import { Sidebar,Label } from 'flowbite-react';
 import AuthContext from '../context/AuthContext';
 import { LuTags,LuLogOut  } from "react-icons/lu";
 import { FaRadio,FaUsers } from "react-icons/fa6"
-
+//import { useNavigate } from 'react-router-dom';
 import { BiSolidPlaylist } from "react-icons/bi";
 import { FaCity } from "react-icons/fa";
 //import { sideBarCustomTheme } from '../theme/SideBarTheme.js';
@@ -93,7 +93,7 @@ const SideBar = () => {
     const location = useLocation();
     const [page,setPage] = useState('');
     const {setLoggedUser,loggedUser} = useContext(AuthContext);
-
+   // const navigation = useNavigation();
     useEffect(()=>{
         const urlParams = new URLSearchParams(location.search);
         const pageFromUrl = urlParams.get('page');
@@ -108,7 +108,7 @@ const SideBar = () => {
       const onLogout = async () => {
 
         setLoggedUser(null);
-        navigate('/login');
+        //navigation.navigate('/login');
       
       }
 
@@ -126,11 +126,11 @@ const SideBar = () => {
         <Sidebar.ItemGroup>
             
               <Link to='/?page=radios'>
-                    <Sidebar.Item  active={page === 'radios' || !page} icon={FaRadio} as='div'>Rádios</Sidebar.Item>
+                    <Sidebar.Item data-testid="radios"  active={page === 'radios' || !page} icon={FaRadio} as='div'>Rádios</Sidebar.Item>
               </Link>
                          
               <Link to='/?page=categories'>
-                    <Sidebar.Item  active={page === 'categories' || !page} icon={LuTags} as='div'>Categorias</Sidebar.Item>
+                    <Sidebar.Item data-testid="categories" active={page === 'categories' || !page} icon={LuTags} as='div'>Categorias</Sidebar.Item>
               </Link>
 
                <Link to='/?page=cities'>
